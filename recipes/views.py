@@ -1,13 +1,13 @@
 from django.shortcuts import render
 
+from utils.recipes.factory import make_recipe
+
 
 def home(request):
     return render(
         request,
         "recipes/pages/home.html",
-        context={
-            "name": "Johnn David",
-        },
+        context={"recipes": [make_recipe() for _ in range(11)]},
     )
 
 
@@ -16,6 +16,7 @@ def recipe(request, id):
         request,
         "recipes/pages/recipe-view.html",
         context={
-            "name": "Johnn David",
+            "recipe": make_recipe(),
+            "is_datail_page": True,
         },
     )
